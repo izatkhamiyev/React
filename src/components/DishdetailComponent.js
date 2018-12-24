@@ -6,6 +6,8 @@ import {
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 
 const maxLength = (val) => !val || val.length <= 15;
 const minLength = (val) => val && val.length >= 3;
@@ -90,7 +92,7 @@ function RenderDish({ dish }) {
     return (
         <div className="col-12 col-md-5 m-1">
             <Card>
-                <CardImg top src={dish.image} alt={dish.name} />
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
@@ -123,7 +125,7 @@ function RenderComments({ comments, addComment, dishId }) {
 }
 
 const DishDetail = (props) => {
-    if (props.isLoading){
+    if (props.isLoading) {
         return (
             <div className='container'>
                 <div className='row'>
@@ -132,14 +134,14 @@ const DishDetail = (props) => {
             </div>
         );
     }
-    else if (props.errMess){
+    else if (props.errMess) {
         return (
             <div className='container'>
                 <div className='row'>
                     <h4>{props.errMess}</h4>
                 </div>
             </div>
-        );    
+        );
     }
     else if (props.dish != null)
         return (
